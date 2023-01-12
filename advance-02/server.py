@@ -1,14 +1,15 @@
 import socket
 from queue import Queue
 import threading
-
-PORT = 50033
+from settings import PORT
 
 connect_queue = Queue()
 
-def echo_socket(conn: socket.socket):
-    conn.recv(1000)
-    conn.sendall(b'hello')
+
+def echo_socket(connect: socket.socket):
+    connect.recv(1000)
+    connect.sendall(b'hello')
+
 
 if __name__ == "__main__":
 
@@ -19,4 +20,3 @@ if __name__ == "__main__":
             conn, addr = sock.accept()
             print(f"{type(conn)} || {conn=} {addr=}")
             echo_socket(conn)
-
